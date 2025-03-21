@@ -1,6 +1,6 @@
 require('dotenv').config();
 const mongoose = require('./db');
-const Contact = require('./models/users');
+const Contact = require('./routes/users');
 
 const sampleContacts = [
     { firstName: "John", lastName: "Doe", email: "johndoe@example.com", favoriteColor: "Blue", birthday: "1990-05-15" },
