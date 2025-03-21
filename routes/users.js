@@ -1,29 +1,33 @@
-const express = require('express');
-const router = express.Router();
-const mongoose = require('mongoose');
-const User = require('../models/Users'); // Ensure you have a User model
+require("dotenv").config(); // Load .env variables
 
-// ✅ GET all users
-router.get('/', async (req, res) => {
-    try {
-        const users = await User.find();
-        res.status(200).json(users);
-    } catch (err) {
-        res.status(500).json({ message: err.message });
-    }
+const express = require("express");
+const mongoose = require("mongoose");
+
+const contactsRoutes = require("./routes/users");
+
+const app = express();
+app.use(express.json());
+
+// Connect to MongoDB
+const MONGODB_URI = process.env.MONGODB_URI;
+if (!MONGODB_URI) {
+  console.error("Error: MONGODB_URI is missing in .env file");
+  process.exit(1); // Stop the app if MongoDB URI is missing
+}
+
+mongoose
+  .connect(MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true })
+  .then(() => console.log("MongoDB Connected"))
+  .catch((err) => {
+    console.error("MongoDB Connection Error:", err);
+    process.exit(1);
+  });
+
+app.use("/users", contactsRoutes);
+
+app.get("/", (req, res) => {
+  res.send("Hello World");
 });
 
-// ✅ GET a single user by ID
-router.get('/:id', async (req, res) => {-id 
-    try {
-        const user = await User.findById(req.params.id);
-        if (!user) {
-            return res.status(404).json({ message: 'User not found' });
-        }
-        res.status(200).json(user);
-    } catch (err) {
-        res.status(500).json({ message: err.message });
-    }
-});
-
-module.exports = router;
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
