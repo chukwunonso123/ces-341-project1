@@ -1,15 +1,18 @@
-require('dotenv').config();
 const mongoose = require('mongoose');
+require('dotenv').config(); // Load .env file
 
-const mongoURI = process.env.MONGODB_URI;
+const uri = process.env.MONGODB_URI;
 
-if (!mongoURI) {
-    console.error("MONGODB_URI is missing in .env file");
-    process.exit(1);
+if (!uri) {
+    console.error("🚨 MONGODB_URI is not defined in .env file!");
+    process.exit(1); // Stop the app if no URI is provided
 }
 
-mongoose.connect(mongoURI)
-    .then(() => console.log("MongoDB Connected"))
-    .catch(err => console.log("MongoDB Connection Error:", err));
+mongoose.connect(uri, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+})
+    .then(() => console.log("✅ Connected to MongoDB"))
+    .catch(err => console.error("🚨 MongoDB connection error:", err));
 
 module.exports = mongoose;

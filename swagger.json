@@ -1,0 +1,138 @@
+{
+    "swagger": "2.0",
+    "info": {
+      "title": "Contacts API",
+      "description": "API for managing contacts",
+      "version": "1.0.0"
+    },
+    "host": "localhost:3000",
+    "basePath": "/",
+    "schemes": ["http"],
+    "paths": {
+      "/contacts": {
+        "get": {
+          "summary": "Get all contacts",
+          "description": "Returns a list of contacts",
+          "responses": {
+            "200": {
+              "description": "Successful response",
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/definitions/Contact"
+                }
+              }
+            }
+          }
+        },
+        "post": {
+          "summary": "Create a new contact",
+          "parameters": [
+            {
+              "in": "body",
+              "name": "contact",
+              "description": "Contact object",
+              "required": true,
+              "schema": {
+                "$ref": "#/definitions/Contact"
+              }
+            }
+          ],
+          "responses": {
+            "201": {
+              "description": "Contact created"
+            }
+          }
+        }
+      },
+      "/contacts/{id}": {
+        "get": {
+          "summary": "Get a contact by ID",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "type": "string"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Successful response",
+              "schema": {
+                "$ref": "#/definitions/Contact"
+              }
+            },
+            "404": {
+              "description": "Contact not found"
+            }
+          }
+        },
+        "put": {
+          "summary": "Update a contact by ID",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "type": "string"
+            },
+            {
+              "in": "body",
+              "name": "contact",
+              "description": "Updated contact object",
+              "required": true,
+              "schema": {
+                "$ref": "#/definitions/Contact"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Contact updated"
+            }
+          }
+        },
+        "delete": {
+          "summary": "Delete a contact by ID",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "type": "string"
+            }
+          ],
+          "responses": {
+            "204": {
+              "description": "Contact deleted"
+            }
+          }
+        }
+      }
+    },
+    "definitions": {
+      "Contact": {
+        "type": "object",
+        "properties": {
+          "firstName": {
+            "type": "string"
+          },
+          "lastName": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "favoriteColor": {
+            "type": "string"
+          },
+          "birthday": {
+            "type": "string",
+            "format": "date"
+          }
+        }
+      }
+    }
+  }
+  
