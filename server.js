@@ -3,21 +3,21 @@ const mongoose = require('mongoose');
 const dotenv = require('dotenv');
 const cors = require('cors');
 const swaggerUi = require('swagger-ui-express');
-const swaggerDocument = require('./swagger.json'); // Ensure this file exists
-const contactRoutes = require('./routes/contacts'); // Ensure this path is correct
+const swaggerDocument = require('./swagger.json');
+const userRoutes = require('./routes/users'); // Update the path
 
 dotenv.config();
 const app = express();
 
 app.use(cors());
 app.use(express.json()); // Enables parsing of JSON requests
-app.use('/contacts', contactRoutes); // Ensure your routes are correctly mounted
+app.use('/users', userRoutes); // Change from /contacts to /users
 
 // Swagger API Documentation
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 app.get('/', (req, res) => {
-  res.send('Welcome to the Contacts API!');
+  res.send('Welcome to the Users API!');
 });
 
 // Connect to MongoDB
