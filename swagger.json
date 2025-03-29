@@ -8,7 +8,7 @@
    
     "servers": [
       {
-        "url": "http://ces-341-project1.onrender.com",
+        "url": "https://ces-341-project1.onrender.com",
         "description": "Production Server"
       },
       {
