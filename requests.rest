@@ -1,5 +1,5 @@
 ### Get all contacts
-GET http://localhost:3000/contacts
+GET http://localhost:3000/users
 
 ### Get a single contact (Replace {id} with an actual ID)
 GET http://localhost:3000/contacts/67e727e5543876dfb9701b78

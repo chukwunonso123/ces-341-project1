@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const mongoose = require('mongoose');
 const User = require('../models/users'); // Update to your correct User model
 
 // Get all users
@@ -13,10 +14,17 @@ router.get('/', async (req, res) => {
 });
 
 // Get a user by ID
+
+
 router.get('/:id', async (req, res) => {
   try {
+    if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
+      return res.status(400).json({ message: 'Invalid User ID format' });
+    }
+
     const user = await User.findById(req.params.id);
     if (!user) return res.status(404).json({ message: 'User not found' });
+
     res.json(user);
   } catch (err) {
     res.status(500).json({ message: err.message });
