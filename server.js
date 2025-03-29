@@ -4,20 +4,21 @@ const dotenv = require('dotenv');
 const cors = require('cors');
 const swaggerUi = require('swagger-ui-express');
 const swaggerDocument = require('./swagger.json');
-const userRoutes = require('./routes/users'); // Update the path
+const userRoutes = require('./routes/users'); // Ensure this path is correct
 
 dotenv.config();
 const app = express();
 
 app.use(cors());
 app.use(express.json()); // Enables parsing of JSON requests
-app.use('/users', userRoutes); // Change from /contacts to /users
+app.use('/users', userRoutes); // Ensure your routes are correctly mounted
 
 // Swagger API Documentation
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
+// Default route to check if the server is running
 app.get('/', (req, res) => {
-  res.send('Welcome to the Users API!');
+  res.send('API is running...');
 });
 
 // Connect to MongoDB
