@@ -5,10 +5,10 @@
       "description": "API for managing users",
       "version": "1.0.0"
     },
-    "schemes": ["https"],
+    "schemes": ["http"],
     "servers": [
       {
-        "url": "https://ces-341-project1.onrender.com",
+        "url": "http://ces-341-project1.onrender.com",
         "description": "Production Server"
       },
       {
