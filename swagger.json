@@ -5,9 +5,17 @@
       "description": "API for managing contacts",
       "version": "1.0.0"
     },
-    "host": "/ces-341-project1.onrender.com",
-    "basePath": "/",
-    "schemes": ["http"],
+    "schemes": ["https"],
+    "servers": [
+      {
+        "url": "https://ces-341-project1.onrender.com",
+        "description": "Production Server"
+      },
+      {
+        "url": "http://localhost:3000",
+        "description": "Local Development Server"
+      }
+    ],
     "paths": {
       "/contacts": {
         "get": {
