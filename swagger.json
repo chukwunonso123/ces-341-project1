@@ -1,8 +1,8 @@
 {
     "swagger": "2.0",
     "info": {
-      "title": "Contacts API",
-      "description": "API for managing contacts",
+      "title": "Users API",
+      "description": "API for managing users",
       "version": "1.0.0"
     },
     "schemes": ["https"],
@@ -17,45 +17,45 @@
       }
     ],
     "paths": {
-      "/contacts": {
+      "/users": {
         "get": {
-          "summary": "Get all contacts",
-          "description": "Returns a list of contacts",
+          "summary": "Get all users",
+          "description": "Returns a list of users",
           "responses": {
             "200": {
               "description": "Successful response",
               "schema": {
                 "type": "array",
                 "items": {
-                  "$ref": "#/definitions/Contact"
+                  "$ref": "#/definitions/User"
                 }
               }
             }
           }
         },
         "post": {
-          "summary": "Create a new contact",
+          "summary": "Create a new user",
           "parameters": [
             {
               "in": "body",
-              "name": "contact",
-              "description": "Contact object",
+              "name": "user",
+              "description": "User object",
               "required": true,
               "schema": {
-                "$ref": "#/definitions/Contact"
+                "$ref": "#/definitions/User"
               }
             }
           ],
           "responses": {
             "201": {
-              "description": "Contact created"
+              "description": "User created"
             }
           }
         }
       },
-      "/contacts/{id}": {
+      "/users/{id}": {
         "get": {
-          "summary": "Get a contact by ID",
+          "summary": "Get a user by ID",
           "parameters": [
             {
               "name": "id",
@@ -68,16 +68,16 @@
             "200": {
               "description": "Successful response",
               "schema": {
-                "$ref": "#/definitions/Contact"
+                "$ref": "#/definitions/User"
               }
             },
             "404": {
-              "description": "Contact not found"
+              "description": "User not found"
             }
           }
         },
         "put": {
-          "summary": "Update a contact by ID",
+          "summary": "Update a user by ID",
           "parameters": [
             {
               "name": "id",
@@ -87,22 +87,22 @@
             },
             {
               "in": "body",
-              "name": "contact",
-              "description": "Updated contact object",
+              "name": "user",
+              "description": "Updated user object",
               "required": true,
               "schema": {
-                "$ref": "#/definitions/Contact"
+                "$ref": "#/definitions/User"
               }
             }
           ],
           "responses": {
             "200": {
-              "description": "Contact updated"
+              "description": "User updated"
             }
           }
         },
         "delete": {
-          "summary": "Delete a contact by ID",
+          "summary": "Delete a user by ID",
           "parameters": [
             {
               "name": "id",
@@ -113,14 +113,14 @@
           ],
           "responses": {
             "204": {
-              "description": "Contact deleted"
+              "description": "User deleted"
             }
           }
         }
       }
     },
     "definitions": {
-      "Contact": {
+      "User": {
         "type": "object",
         "properties": {
           "firstName": {
