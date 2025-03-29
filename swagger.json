@@ -5,7 +5,7 @@
       "description": "API for managing users",
       "version": "1.0.0"
     },
-    "schemes": ["http"],
+   
     "servers": [
       {
         "url": "http://ces-341-project1.onrender.com",
