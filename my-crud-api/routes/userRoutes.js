@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const User = require('../models/userModel'); // Make sure this path is correct
+const User = require('../models/userModel'); // Ensure this path is correct
 
 /**
  * @swagger
@@ -34,12 +34,15 @@ router.post('/', async (req, res) => {
   try {
     const { name, email } = req.body;
 
-    // Basic validation
+    // Validate that name and email are provided
     if (!name || !email) {
       return res.status(400).json({ message: 'Name and email are required.' });
     }
 
+    // Create the new user
     const newUser = new User({ name, email });
+
+    // Save the new user to the database
     await newUser.save();
     res.status(201).json(newUser);
   } catch (err) {
@@ -47,12 +50,13 @@ router.post('/', async (req, res) => {
   }
 });
 
+
 /**
  * @swagger
  * /api/users:
  *   get:
  *     summary: Get all users
- *     description: Retrieve a list of all users in the database.
+ *     description: Retrieve a list of all users from the database.
  *     responses:
  *       200:
  *         description: A list of users
@@ -70,34 +74,25 @@ router.get('/', async (req, res) => {
 
 /**
  * @swagger
- * /api/users/{id}:
+ * /api/users:
  *   get:
- *     summary: Get a single user by ID
- *     description: Retrieve a user by their unique ID.
- *     parameters:
- *       - in: path
- *         name: id
- *         required: true
- *         schema:
- *           type: string
- *         description: The ID of the user
+ *     summary: Get all users
+ *     description: Retrieve a list of all users from the database.
  *     responses:
  *       200:
- *         description: A single user object
- *       404:
- *         description: User not found
+ *         description: A list of users
  *       500:
  *         description: Server error
  */
-router.get('/:id', async (req, res) => {
+router.get('/', async (req, res) => {
   try {
-    const user = await User.findById(req.params.id);
-    if (!user) return res.status(404).json({ message: 'User not found' });
-    res.json(user);
+    const users = await User.find();
+    res.json(users);
   } catch (err) {
     res.status(500).json({ message: err.message });
   }
 });
+
 
 /**
  * @swagger
